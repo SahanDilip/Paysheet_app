@@ -1,0 +1,23 @@
+.home-container {
+    display: flex;
+    flex-direction: row;
+    height: calc(100vh - 75px); /* Full height minus header */
+    width: 100%; /* Full width */
+  }
+  
+  .home-left-side {
+    flex: 1; /* Takes up 65% of the width */
+    display: flex;
+    flex-direction: column;
+    padding: 2px;
+    min-height: 100%;
+    box-sizing: border-box;
+  }
+  
+  .home-right-side {
+    flex: 0 0 37%; /* Takes up 35% of the width */
+    display: flex;
+    flex-direction: column;
+    padding: 2px;
+    box-sizing: border-box;
+  }

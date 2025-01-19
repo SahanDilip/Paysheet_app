@@ -1,0 +1,45 @@
+.cashier-details-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  max-width: 1200px; /* Increased width to fit both info and photo */
+  margin: 0 auto;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+}
+
+.cashier-details-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.cashier-info {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.cashier-info-row {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+}
+
+.cashier-info-row text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cashier-avatar {
+  flex-shrink: 0; 
+}
+
+.logout-button {
+  margin-top: 20px;
+  background-color: black !important;
+}

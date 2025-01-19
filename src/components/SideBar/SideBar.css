@@ -1,0 +1,35 @@
+.tab{
+    height: 100px;
+    gap: 10px;
+    align-items: center;
+  }
+  
+  .ant-menu-item {
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+    flex-direction: column; 
+    color: black !important;
+    height: 100px !important;
+    font-weight: 700;
+  }
+  .ant-menu-item .ant-menu-item-icon {
+    margin-top: 20px;
+    font-size: 30px !important;
+  }
+  
+  .ant-menu-item span {
+    display: block;
+    margin-top: 8px; 
+    font-size: 16px; 
+  }
+  
+  .ant-menu-item-selected, .ant-menu-item:hover {
+    background-color: #d7d7d7 !important;
+    height: 100%; 
+  }
+  
+  .ant-menu-item:hover {
+    background-color: #d7d7d7 !important;
+    height: 100%; 
+  }

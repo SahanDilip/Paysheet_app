@@ -1,0 +1,56 @@
+.landing-page {
+    height: 100vh;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+
+  
+.overlay {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #ffffff; /* Light text color */
+    background: rgba(0, 0, 0, 0.7); /* Darker overlay for more fade */
+    padding: 150px; /* Increased padding */
+    border-radius: 10px;
+}
+
+/* background: rgba(255, 192, 120, 0.7); */
+/* background: rgba(0, 0, 0, 0.7); */
+
+.title {
+    font-size: 4rem;
+    margin-bottom: 10px; 
+}
+
+.subtitle {
+    font-size: 1.5rem;
+    margin-bottom: 40px; 
+}
+
+.login-button {
+    background-color: rgb(32, 159, 32);
+    color: white;
+    font-weight:500;
+    border: none;
+    height: 50px;
+    width: 200px;
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-button:hover {
+    background-color: green !important;
+}
