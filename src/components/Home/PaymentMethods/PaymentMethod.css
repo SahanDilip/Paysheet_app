@@ -198,3 +198,14 @@
   .complete-payment:hover {
     background-color: #002465 !important;
   }
+
+
+  .add-customer-btn {
+    padding: 12px 24px;
+    background-color: #000000;
+    color: #ffffff; 
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+  }

@@ -37,6 +37,7 @@ export default function RightContent() {
   const [totalAmount, setLocalTotalAmount] = useState(0);
   const [totalDiscount, setLocalTotalDiscount] = useState(0); 
   const [loading, setLoading] = useState(false); 
+ 
   
 
 

@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
-import { Button, Input, notification } from 'antd';
-import { ArrowLeftOutlined } from '@ant-design/icons';
+import { Button, Modal, notification, Input } from 'antd';
+import { ArrowLeftOutlined, PlusOutlined } from '@ant-design/icons';
 import { HomeContext } from '../../../Context/HomeContext';
 import jsPDF from 'jspdf';
 import './PaymentMethod.css';
@@ -14,11 +14,13 @@ export default function PaymentMethods() {
     setRightContent,
   } = useContext(HomeContext);
 
+  const [orderId, setOrderId] = useState('');
   const [deliveryAgent, setDeliveryAgent] = useState('');
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   // Helper to group items by item_id
   const getConsolidatedItems = (items) => {
-    const groupedItems = items.reduce((acc, item) => {
+    return items.reduce((acc, item) => {
       if (!acc[item.item_id]) {
         acc[item.item_id] = { ...item, totalQuantity: item.quantity };
       } else {
@@ -26,46 +28,56 @@ export default function PaymentMethods() {
       }
       return acc;
     }, {});
-    return Object.values(groupedItems);
   };
 
-  // Generate PDF
+  // Generate PDF with improved structure
   const generatePDF = (consolidatedItems) => {
     const doc = new jsPDF();
-    doc.setFontSize(16);
-    doc.text('Bill Receipt', 20, 20);
+    doc.setFontSize(18);
+    doc.text('Bill Receipt', 105, 20, { align: 'center' });
 
-    // Add Bill Details
+    // Add Order and Bill Details
     doc.setFontSize(12);
-    doc.text(`Total Amount: Rs. ${totalAmount.toFixed(2)}`, 20, 40);
-    doc.text(`Discount: Rs. ${totalDiscount.toFixed(2)}`, 20, 50);
+    doc.text(`Order ID: ${orderId || 'N/A'}`, 20, 40);
+    doc.text(`Delivery Agent: ${deliveryAgent || 'N/A'}`, 20, 50);
+    doc.text(`Total Amount: Rs. ${totalAmount.toFixed(2)}`, 20, 60);
+    doc.text(`Discount: Rs. ${totalDiscount.toFixed(2)}`, 20, 70);
     doc.text(
-      `Payable Amount: Rs. ${(((totalAmount * 105) / 100) - totalDiscount).toFixed(2)}`,
+      `Payable Amount (incl. tax): Rs. ${(((totalAmount * 105) / 100) - totalDiscount).toFixed(2)}`,
       20,
-      60
+      80
     );
-    doc.text(`Delivery Agent: ${deliveryAgent || 'N/A'}`, 20, 70);
 
-    // Add Items
-    let yPosition = 90;
+    // Add Table Header
+    let yPosition = 100;
     doc.text('Items:', 20, yPosition);
     yPosition += 10;
+    doc.text('No.', 20, yPosition);
+    doc.text('Item Name', 40, yPosition);
+    doc.text('Qty', 120, yPosition);
+    doc.text('Unit Price', 140, yPosition);
+    doc.text('Total', 180, yPosition);
 
-    consolidatedItems.forEach((item, index) => {
+    // Add Items Data
+    yPosition += 10;
+    Object.values(consolidatedItems).forEach((item, index) => {
       const totalPrice = (item.price * item.totalQuantity).toFixed(2);
-      const price = parseFloat(item.price); // Ensure price is a number
-      doc.text(
-        `${index + 1}. ${item.name || ''} - ${item.item_id}: Rs.${price.toFixed(
-          2
-        )} x ${item.totalQuantity} = Rs.${totalPrice}`,
-        20,
-        yPosition
-      );
+      doc.text(`${index + 1}`, 20, yPosition);
+      doc.text(`${item.name || ''}`, 40, yPosition);
+      doc.text(`${item.totalQuantity}`, 120, yPosition);
+      doc.text(`Rs.${parseFloat(item.price).toFixed(2)}`, 140, yPosition);
+      doc.text(`Rs.${totalPrice}`, 180, yPosition);
       yPosition += 10;
     });
 
     // Save PDF
     doc.save('Bill_Receipt.pdf');
+  };
+
+  // Handle Add Order ID
+  const handleSetOrderId = () => {
+    setOrderId(orderId);
+    setIsModalVisible(false);
   };
 
   // Handle Complete Payment
@@ -74,7 +86,7 @@ export default function PaymentMethods() {
 
     try {
       // Simulating API call
-      const response = { ok: true }; // Replace this with actual API call
+      const response = { ok: true }; // Replace with actual API call
       if (response.ok) {
         notification.success({
           message: 'Bill Created',
@@ -107,7 +119,13 @@ export default function PaymentMethods() {
       <h3 className="sub-topic">Bill Information</h3>
       <div className="payment-info">
         <div className="info-item">
+          <strong>Order ID:</strong> {orderId || 'N/A'}
+        </div>
+        <div className="info-item">
           <strong>Bill Total:</strong> Rs.{totalAmount.toFixed(2)}
+        </div>
+        <div className="info-item">
+          <strong>Tax Amount:</strong> Rs.{((totalAmount * 5) / 100).toFixed(2)}
         </div>
         <div className="info-item">
           <strong>Bill After Tax:</strong> Rs.{((totalAmount * 105) / 100).toFixed(2)}
@@ -129,6 +147,9 @@ export default function PaymentMethods() {
   // Render Transport Methods
   const renderTransportMethods = () => (
     <div className="payment-methods-container">
+      <button onClick={() => setIsModalVisible(true)} className="add-customer-btn">
+        <PlusOutlined /> Add Order ID
+      </button>
       <h3 className="sub-topic">Transport Methods</h3>
       <div className="payment-method-buttons">
         {['Thalabath', 'Outlet', 'Noon', 'Kaath', 'Nanban'].map((agent) => (
@@ -146,7 +167,7 @@ export default function PaymentMethods() {
         type="primary"
         className="complete-payment"
         onClick={handleCompletePayment}
-        disabled={!deliveryAgent}
+        disabled={!deliveryAgent || !orderId}
       >
         Complete Payment
       </Button>
@@ -170,6 +191,26 @@ export default function PaymentMethods() {
         {renderPaymentInfo()}
         {renderTransportMethods()}
       </div>
+      <Modal
+        title="Order ID"
+        open={isModalVisible}
+        onCancel={() => setIsModalVisible(false)}
+        footer={null}
+      >
+        <Input
+          placeholder="Enter your Order ID"
+          value={orderId}
+          onChange={(e) => setOrderId(e.target.value)}
+          style={{ marginBottom: '10px' }}
+        />
+        <Button
+          type="primary"
+          onClick={handleSetOrderId}
+          style={{ backgroundColor: '#414141', borderColor: 'black' }}
+        >
+          Add Order ID
+        </Button>
+      </Modal>
     </div>
   );
 }
