@@ -43,6 +43,30 @@ import food_29 from './food_29.png'
 import food_30 from './food_30.png'
 import food_31 from './food_31.png'
 import food_32 from './food_32.png';
+import diliveroo_logo from './diliveroo_logo.png';
+import gray_kitchen_logo from './gray_kitchen_logo.png';
+import noon_logo from './noon_logo.png';
+import talabat_logo from './talabat_logo.png';
+import outlet_logo from './outlet_logo.png';
+import careem_logo from './careem_logo.jpg';
+import welcome_img from './welcome.jpg';
+
+
+export const logos = {
+
+    gray_kitchen_logo,
+    welcome_img
+
+}
+
+export const delivary_agents = {
+    talabat_logo,
+    outlet_logo,
+    noon_logo,
+    diliveroo_logo,
+    careem_logo
+}
+
 
 export const assets = {
     food_1,
@@ -78,6 +102,11 @@ export const assets = {
     food_31,
     food_32
 }
+
+
+export const logo_list = [
+
+]
 
 // import add_icon_white from './add_icon_white.png'
 // import add_icon_green from './add_icon_green.png'
@@ -383,3 +412,4 @@ export const assets = {
 //         category: "Noodles"
 //     }
 // ]
+

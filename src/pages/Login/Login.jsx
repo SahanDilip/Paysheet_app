@@ -10,6 +10,7 @@ import {
 import axios from "axios";
 import { useNavigate } from "react-router-dom"; 
 import baseUrl from "../../../apiConfig";
+import { logos } from "../../assets/assets";
 
 
 export default function Login({ setIsAuthenticated }) {
@@ -17,44 +18,16 @@ export default function Login({ setIsAuthenticated }) {
   const navigate = useNavigate();
 
   const onFinish = (values) => {
-  // const url = `${baseUrl}:3002/employee/login`;
-  // axios
-  //   .post(url, {
-  //     email: values.username,
-  //     password: values.password,
-  //   })
-  //   .then((response) => {
-  //     if (response.status === 200) {
-  //       const accessToken = response.data.accessToken || response.data.token || response.data;
-  //       const expirationTime = new Date().getTime() + 30 * 60 * 1000; 
-        
-  //       localStorage.setItem("accessToken", JSON.stringify(accessToken));
-  //       localStorage.setItem("tokenExpiration", expirationTime.toString()); 
-        
-  //       setIsAuthenticated(true);
-  //       navigate("/dashboard");
-  //     } else {
-  //       messageApi.open({
-  //         type: "error",
-  //         content: "Invalid credentials",
-  //       });
-  //     }
-  //   })
-  //   .catch(() => {
-  //     messageApi.open({
-  //       type: "error",
-  //       content: "Login failed",
-  //     });
-  //   });
-
-    setIsAuthenticated(true);
-    navigate("/dashboard");
+    if(values.username === "GrayKitchen" && values.password === "1234") {
+      setIsAuthenticated(true);
+      navigate("/dashboard");
+    }
 };
   return (
     <div className="login-container">
       {contextHolder}
       <div className="image-section">
-        <img src="./assets/food_1.png" alt="Welcome" />
+        <img src={logos.welcome_img} alt="Welcome" />
       </div>
       <div className="form-section">
         <h1>Welcome Back! <br /> Login to your account</h1>

@@ -17,6 +17,7 @@ export default function LeftContent() {
     { category_id: 7, category_name: 'Side Dishes' },
     { category_id: 8, category_name: 'Desserts' },
     { category_id: 9, category_name: 'Juices & Drinks' },
+    { category_id: 10, category_name: 'Boxes' }, // Added Boxes
   ]);
   const [selectedCategory, setSelectedCategory] = useState(categories[0]);
   const [foodItems, setFoodItems] = useState([]);
@@ -94,6 +95,36 @@ export default function LeftContent() {
       { item_id: 53, name: 'Diet 7up', price: '7.00' },
       { item_id: 54, name: 'Sparkling Water', price: '13.00' },
     ],
+    'Boxes': [
+      { item_id: 55, name: 'Grilled Chicken Breast', price: '55.00' },
+      { item_id: 56, name: 'Chicken Taouk Plate', price: '55.00' },
+      { item_id: 57, name: 'Warak Enab & Koussa', price: '60.00' },
+      { item_id: 58, name: 'Bamieh Bil Lahme', price: '55.00' },
+      { item_id: 59, name: 'Riz a Djej', price: '55.00' },
+      { item_id: 60, name: 'Penne Mushroom Cream', price: '55.00' },
+      { item_id: 61, name: 'Bazella Bil Lahme', price: '55.00' },
+      { item_id: 62, name: 'Koussa Mahshi', price: '58.00' },
+      { item_id: 63, name: 'Jordanian Manssaf', price: '85.00' },
+      { item_id: 64, name: 'Loubieh Bil Lahme', price: '55.00' },
+      { item_id: 65, name: 'Oriental Lamb Shank', price: '65.00' },
+      { item_id: 66, name: 'Kebab Plate', price: '55.00' },
+      { item_id: 67, name: 'Kibbeh Bil Saynieh', price: '60.00' },
+      { item_id: 68, name: 'Daoud Basha', price: '55.00' },
+      { item_id: 69, name: 'Kafta & Betata', price: '55.00' },
+      { item_id: 70, name: 'Kibbeh Bil Laban', price: '60.00' },
+      { item_id: 71, name: 'Spinach Stew', price: '55.00' },
+      { item_id: 72, name: 'Djej W Batata', price: '55.00' },
+    ]
+  };
+
+  const getImageSrc = (item) => {
+    if (assets[`food_${item.item_id}`]) {
+      return assets[`food_${item.item_id}`];
+    } else if (assets['food_10']) {
+      return assets['food_14'];
+    } else {
+      return 'placeholder.png';
+    }
   };
   
 
@@ -170,10 +201,14 @@ export default function LeftContent() {
         {foodItems.length > 0 ? (
           foodItems.map((item, index) => (
             <div className='food-card' key={index} onClick={() => handleAddItem(item)}>
-              <img 
+              {/* <img 
                 src={ assets[`food_${item.item_id}`] || 'placeholder.png'}  
                 alt={item.item_name || 'Food item'} 
-              />
+              /> */}
+              <img 
+                  src={getImageSrc(item)} 
+                  alt={item.name || 'Food item'} 
+                />      
               <div className='food-details'>
                 <div className='food-name'>{item.name || 'Unknown item'}</div>
                 <div className='food-price'>

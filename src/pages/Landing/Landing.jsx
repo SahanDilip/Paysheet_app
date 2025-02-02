@@ -10,7 +10,7 @@ const Landing = () => {
   const navigate = useNavigate();
   const { isAuthenticated , setIsAuthenticated} = useContext(HomeContext);
 
-  setIsAuthenticated(true);
+  // setIsAuthenticated(true);
 
   
 
@@ -23,8 +23,6 @@ const Landing = () => {
     else {
       navigate("/login");
     }
-    
-    navigate("/login"); 
   };
 
 
