@@ -136,11 +136,11 @@ export default function RightContent() {
                         <span>{quantity}</span>
                         <button onClick={() => increaseQuantity(index)}><PlusOutlined /></button>
                       </div>
-                      <span className='item-discount'>
+                      {/* <span className='item-discount'>
                         {`Discount: Rs.${discountPerItem.toFixed(2)}`}
-                      </span>
+                      </span> */}
                       <span className='item-total'>
-                        {isNaN(total) ? 'Invalid Total' : `Rs.${total}`}
+                        {isNaN(total) ? 'Invalid Total' : `AED.${total}`}
                       </span>
                     </div>
                     <button className='remove-item' onClick={() => removeItem(index)}><CloseOutlined /></button>
@@ -148,16 +148,16 @@ export default function RightContent() {
                 );
               })}
             </div>
-    </div>
-        <div className='order-summary'>
-          <div className='summary-row'>
-            <span>Bill Total:</span>
-            <span>Rs.{totalAmount.toFixed(2)}</span>
-          </div>
-        </div>
-        <div className='order-actions'>
-          <button className='proceed' onClick={handleProceed}><CheckOutlined /> Proceed</button>
-        </div>
-    </div>
+            </div>
+                <div className='order-summary'>
+                  <div className='summary-row'>
+                    <span>Bill Total:</span>
+                    <span>AED.{totalAmount.toFixed(2)}</span>
+                  </div>
+                </div>
+                <div className='order-actions'>
+                  <button className='proceed' onClick={handleProceed}><CheckOutlined /> Proceed</button>
+                </div>
+            </div>
   );
 }

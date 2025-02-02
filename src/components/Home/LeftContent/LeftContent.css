@@ -15,7 +15,8 @@
   
   .category-buttons button {
     flex: 1;
-    margin: 0 4px; /* Space between buttons */
+    margin: 8px; /* Space between buttons */
+
     padding: 12px;
     border: none;
     background-color: #ffffff;
@@ -23,17 +24,20 @@
     cursor: pointer;
     font-size: 14px;
     font-weight: 700;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, color 0.3s;
+    outline: none;
   }
   
+  /* Alternative using box-shadow for a more stylish effect */
   .category-buttons button.selected {
-    background-color: #d7d7d7 !important; 
+    box-shadow: 0 0 4px 2px #002465; /* Outer glow effect */
+    border-radius: 8px;
   }
-  
-  .category-buttons button:hover {
-    background-color:#002465 !important;
+  .category-buttons button:hover:not(.selected) {
+    background-color: #002465 !important;
     color: #ffffff;
   }
+  
   
   .food-cards {
     display: flex;

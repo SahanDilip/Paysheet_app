@@ -19,7 +19,9 @@ export default function LeftContent() {
     { category_id: 9, category_name: 'Juices & Drinks' },
     { category_id: 10, category_name: 'Boxes' }, // Added Boxes
   ]);
-  const [selectedCategory, setSelectedCategory] = useState(categories[0]);
+  const [selectedCategory, setSelectedCategory] = useState(
+    categories.length > 0 ? categories[0].category_id : null
+  );
   const [foodItems, setFoodItems] = useState([]);
 
   const categoryData = {
@@ -134,48 +136,35 @@ export default function LeftContent() {
   };
 
   useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        if (categories && categories.length > 0) {
-          setSelectedCategory(categories[0]);
-          setFoodItems(categoryData[categories[0].category_name] || []);
-          console.log(categories)
-        } else {
-          console.error('No categories available');
-        }
-      } catch (error) {
-        console.error('Error fetching categories:', error);
-      }
-    };
-  
-    if (isAuthenticated) { 
-      fetchCategories();
+    if (categories.length > 0 && selectedCategory === null) {
+      setSelectedCategory(categories[0].category_id);
     }
-  }, [isAuthenticated]);
+  }, [categories, selectedCategory]);
+  
   
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-      console.log(`selected Categoy:${selectedCategory}`)
-      console.log(`selected Categoy name:${categoryData[selectedCategory.category_name]}`)
-
-        if (selectedCategory) {
-          const items = categoryData[selectedCategory.category_name] || [];
-          setFoodItems(items);
-        } else {
-          console.error('No category selected');
+        if (selectedCategory !== null) {
+          const categoryName = categories.find(cat => cat.category_id === selectedCategory)?.category_name;
+          if (categoryName) {
+            setFoodItems(categoryData[categoryName] || []);
+          }
         }
       } catch (error) {
         console.error('Error fetching products:', error);
       }
     };
+  
+    if (isAuthenticated) {
+      fetchProducts();
+    }
+  }, [selectedCategory, isAuthenticated, categories]);
+  
 
-    fetchProducts();
-  }, [selectedCategory, isAuthenticated]);
-
-  const handleCategoryClick = (category_id) => {
-    setSelectedCategory(category_id);
+  const handleCategoryClick = (category) => {
+    setSelectedCategory(category.category_id);
   };
 
   return (

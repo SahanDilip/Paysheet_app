@@ -5,24 +5,6 @@
     padding: 8px;
   }
   
-  .add-customer {
-    width: 100%;
-    background-color: #ffffff; 
-    border-radius: 2px;
-    height: 75px;
-    padding: 8px;
-    display: flex;
-    align-items: center; 
-  }
-  
-  .add-customer {
-    color: #000000; 
-    font-size:40px;
-    align-items: center;
-    justify-content: center;
-    
-  }
-  
 
   
   .selected-items {
@@ -32,6 +14,7 @@
     background-color: #ffffff;
     padding: 16px;
     overflow-y: auto; /* Add scrolling if there are too many items */
+    border-radius: 8px;
   }
   
   .selected-item-card {
@@ -42,11 +25,16 @@
     margin-bottom: 8px;
     border-radius: 4px;
     justify-content: space-between; 
+    transition: all 0.3s ease-in-out;
   }
+
+  
   
   .item-name {
     flex: 2;
     text-align: left;
+    font-weight: bold;
+    font-size: 18px;
   }
   
   .item-details {
@@ -58,17 +46,27 @@
   
   .item-price, .item-quantity, .item-discount, .item-total {
     text-align: center;
+    color: #000000;
   }
   
   .quantity-controls {
     display: flex;
     align-items: center;
+    gap: 15px;
   }
   
   .quantity-controls button {
     border: none;
     background-color: transparent;
     cursor: pointer;
+
+    border: none;
+    background-color: #007bff;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
   }
   
   .item-discount input {
@@ -79,7 +77,10 @@
   .remove-item {
     flex-shrink: 0; 
     border: none;
-    background-color: transparent;
+    background-color: #dc3545;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
     cursor: pointer;
   }
   
@@ -132,37 +133,4 @@
     background-color: #002465 !important;
   }
   
-  .customer-details {
-    flex: 1;
-    padding: 0 10px; /* Padding for some space within the white rectangle */
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
   
-  .customer-info {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  
-  .customer-name, .customer-phone, .customer-points {
-    font-weight: bold;
-    margin-right: 15px;
-    font-size: larger;
-  }
-  
-  .change-customer {
-    background-color: #000000;
-    color: #ffffff;
-    border: none;
-    padding: 3px px;
-    border-radius: 5px;
-    cursor: pointer;
-    align-self: flex-end; /* Aligns button to the bottom right corner */
-  }
-  
-  .change-customer:hover {
-    background-color: #414141 !important;
-    color: #ffffff;
-  }

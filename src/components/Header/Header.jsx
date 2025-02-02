@@ -33,7 +33,7 @@ const Header = () => {
   return (
     <div className="header_" style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
   <Typography.Title level={2} style={{ margin: 0 }}>
-    Point Master
+    POS System
   </Typography.Title>
   
   <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
