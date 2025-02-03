@@ -3,7 +3,7 @@ import RightContent from '../../../components/Home/RightContent/RightContent';
 import LeftContent from '../../../components/Home/LeftContent/LeftContent';
 import PaymentMethods from '../../../components/Home/PaymentMethods/PayementMethods';
 import { HomeContext } from '../../../Context/HomeContext';
-import './home.css';
+import './Home.css';
 
 function Home() {
   const { rightContent } = useContext(HomeContext);
