@@ -4,7 +4,7 @@ import { PlusOutlined, MinusOutlined, CloseOutlined, CheckOutlined, ArrowRightOu
 import axios from 'axios';
 import { notification } from 'antd';
 import { HomeContext } from '../../../Context/HomeContext';
-import './Rightcontent.css';
+import './RightContent.css';
 import baseUrl from '../../../../apiConfig';
 // import WebcamQrScanner from "react-webcam-qr-scanner";
 
