@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Modal, Input, Button } from 'antd';
-import { PlusOutlined, MinusOutlined, CloseOutlined, CheckOutlined, ArrowRightOutlined, PauseOutlined, QrcodeOutlined } from "@ant-design/icons";
+import { PlusOutlined, MinusOutlined, CloseOutlined, CheckOutlined, ArrowRightOutlined, PauseOutlined } from "@ant-design/icons";
 import axios from 'axios';
 import { notification } from 'antd';
 import { HomeContext } from '../../../Context/HomeContext';
@@ -12,8 +12,7 @@ import baseUrl from '../../../../apiConfig';
 
 
 export default function RightContent() {
-  const {isQRCodeVisible,
-    setIsQRCodeVisible,
+  const {
     searchValue,
     setSearchValue,
     selectedItems, 
