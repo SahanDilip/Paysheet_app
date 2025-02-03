@@ -96,34 +96,43 @@ export default function PaymentMethods() {
     const xEqual = 105;
     const xValue = 120;
 
-    const vat = (totalAmount * 0.05);
-    const payableAmount = (totalAmount + vat - totalDiscount);
-
+    const vat = totalAmount * 0.05;
+    const totdiscount = (totalAmount * totalDiscount) / 100;
+    const amountWithVAT = totalAmount + vat;
+    const discountAmount = (totalDiscount / 100) * amountWithVAT;
+    const payableAmount = amountWithVAT - discountAmount;
+    
     doc.text('Amount:', xLabel, yPosition);
     doc.text('=', xEqual, yPosition);
     doc.text(`${totalAmount.toFixed(2)} AED`, xValue, yPosition);
     yPosition += 10;
-
-    doc.text('Discount:', xLabel, yPosition);
-    doc.text('=', xEqual, yPosition);
-    doc.text(`${totalDiscount.toFixed(2)} AED`, xValue, yPosition);
-    yPosition += 10;
-
+    
     doc.text('VAT:', xLabel, yPosition);
     doc.text('=', xEqual, yPosition);
     doc.text(`${vat.toFixed(2)} AED`, xValue, yPosition);
     yPosition += 10;
-
+    
+    doc.text('Amount with VAT:', xLabel, yPosition);
+    doc.text('=', xEqual, yPosition);
+    doc.text(`${amountWithVAT.toFixed(2)} AED`, xValue, yPosition);
+    yPosition += 10;
+    
+    doc.text('Discount:', xLabel, yPosition);
+    doc.text('=', xEqual, yPosition);
+    doc.text(`${discountAmount.toFixed(2)} AED`, xValue, yPosition);
+    yPosition += 10;
+    
     doc.text('Payable Amount:', xLabel, yPosition);
     doc.text('=', xEqual, yPosition);
     doc.text(`${payableAmount.toFixed(2)} AED`, xValue, yPosition);
-
+    
     // Thank You Message
     yPosition += 20;
     doc.setFontSize(14);
     doc.text('Thank You', centerX, yPosition, { align: 'center' });
-
+    
     doc.save('Bill_Receipt.pdf');
+    
   };
 
   const handleSetOrderId = () => {
@@ -165,7 +174,7 @@ export default function PaymentMethods() {
   const renderPaymentInfo = () => {
     const vatAmount = (totalAmount * 0.05);
     const totalWithVat = totalAmount + vatAmount;
-    const finalAmount = totalWithVat - totalDiscount;
+    const finalAmount = totalWithVat - (totalWithVat*totalDiscount)/100;
 
     return (
       <div className="payment-info-container">
@@ -184,7 +193,7 @@ export default function PaymentMethods() {
             <strong>Bill After Tax:</strong> AED {totalWithVat.toFixed(2)}
           </div>
           <div className="info-item">
-            <strong>Discount:</strong> AED {totalDiscount.toFixed(2)}
+            <strong>Discount:</strong> AED {(totalWithVat.toFixed(2)*totalDiscount.toFixed(2))/100 || '0'}
           </div>
           <div className="info-item">
             <strong>Payable Amount:</strong> AED {finalAmount.toFixed(2)}
