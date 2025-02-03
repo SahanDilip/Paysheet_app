@@ -1,7 +1,7 @@
 import React, {useContext, useEffect} from "react";
 import { Button } from "antd";
 import { useNavigate } from "react-router-dom";
-import "./landing.css"; 
+import "./Landing.css"; 
 import { HomeContext } from '../../Context/HomeContext';
 
 

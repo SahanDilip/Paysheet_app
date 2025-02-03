@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Typography, Avatar, Modal } from "antd";
 import { UserOutlined, ClockCircleOutlined } from "@ant-design/icons";
 
-import "./header.css";
+import "./Header.css";
 import CashierDetails from "../../pages/Dashboard/User/User";
 
 const Header = () => {

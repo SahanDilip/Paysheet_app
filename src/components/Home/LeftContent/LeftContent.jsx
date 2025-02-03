@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { HomeContext } from '../../../Context/HomeContext';
-import './leftcontent.css';
+import './Leftcontent.css';
 import baseUrl from '../../../../apiConfig';
 import {assets} from '../../../assets/assets'
 
